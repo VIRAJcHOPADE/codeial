@@ -13,12 +13,12 @@ const userSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true
-    },
-},{
-    // if the user updates something the timestamp will be noted.
-    timestamp:true
+    }
+}, {
+    timestamps: true
 });
 
-const User = mongoose.model('User',userSchema);
 
-module.exports =  User;
+const User = mongoose.model('User', userSchema);
+
+module.exports = User;
