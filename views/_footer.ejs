@@ -1,20 +1,12 @@
-<footer id="layout-footer">
-    <div>
-        <p>
-            &#169; Coding Ninjas. All Rights Reserved
-        </p>
+<footer>
+  <div id="flex-footer">
+    <div class="bottom-text">
+      <a href="/">Home</a>
     </div>
-
-    <div>
-        <nav class="footer-nav">
-            <ul>
-                <li>
-                    <a href="/">Home</a>
-                </li>
-                <li>
-                    <a href="/users/profile">Profile</a>
-                </li>
-            </ul>
-        </nav>
+    <%if(locals.user){%>
+    <div class="bottom-text">
+      <a href="/users/profile/<%=locals.user._id%>">Profile</a>
     </div>
+    <%}%>
+  </div>
 </footer>
