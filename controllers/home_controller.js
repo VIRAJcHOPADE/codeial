@@ -1,103 +1,43 @@
 const Post = require('../models/post');
 const User = require('../models/user');
-const friendship = require('../models/friendship');
 
-module.exports.home = async function(req,res){
+
+
+module.exports.home = async function(req, res){
+
     try{
-
-        let post = await Post.find({})
+         // populate the user of each post
+        let posts = await Post.find({})
         .sort('-createdAt')
         .populate('user')
         .populate({
             path: 'comments',
             populate: {
-                path: 'user likes'
+                path: 'user'
             }
-        })
-        .populate('likes');
-        // console.log('---------->',post);
-        
-
-        let user = await User.find({});
-
-        let signInUserFriends;
-        if(req.user){
-         signInUserFriends = await User.findById(req.user._id)
-         .populate('friendship', 'name email avatar');
-        }
-
-
-       
-        return res.render('home',{
-            title:"SocialArray home",
-            posts : post,
-            all_users : user,
-            all_friends : signInUserFriends
         });
+    
+        let users = await User.find({});
+
+        return res.render('home', {
+            title: "Codeial | Home",
+            posts:  posts,
+            all_users: users
+        });
+
     }catch(err){
-        console.log('ERROR',err);
+        console.log('Error', err);
         return;
     }
-                
+   
 }
 
+// module.exports.actionName = function(req, res){}
 
-//------------------------------------------------------promises method-----------------------------------------------------------------
 
-// module.exports.home = function(req,res){
+// using then
+// Post.find({}).populate('comments').then(function());
 
-//     try{
-//         let post = Post.find({})
-//         .populate('user')
-//         .populate({
-//             path : 'comments',
-//             populate : {
-//                 path : 'user'
-//             }
-//         }).exec();
-    
-//         let user = post.then(User.find({}));
+// let posts = Post.find({}).populate('comments').exec();
 
-//         user.then(function(){
-//             return res.render('home',{
-//                 title:"codeial home",
-//                 posts : post,
-//                 all_users : user
-//             });
-//         });
-       
-//     }catch(err){
-//         console.log('ERROR',err);
-//          return;
-//     }
-   
-// }
-
-//------------------------------------simple method-------------------------------------------------------------------------
-
-// module.exports.home = function(req,res){
-
-//     Post.find({})
-//     .populate('user')
-//     .populate({
-//         path : 'comments',
-//         populate : {
-//             path : 'user'
-//         }
-//     })
-//     .exec(function(err,post){
-//         if(err){
-//                     console.log('error in fetching');
-//                     return;
-//                 }
-
-                // User.find({},function(err,user){
-                //     return res.render('home',{
-                //         title:"codeial home",
-                //         posts : post,
-                //         all_users : user
-                //     });
-                // })
-                
-//     })
-// }
+// posts.then()

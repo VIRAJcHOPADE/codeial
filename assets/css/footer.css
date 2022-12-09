@@ -1,18 +1,13 @@
-footer {
-  position: fixed;
-  bottom: 0px;
-  left: 0px;
-  background-color: black;
-  height: 42px;
-  width: 100%; }
-  footer #flex-footer {
-    display: flex;
-    flex-direction: row;
-    justify-content: left; }
-    footer #flex-footer .bottom-text {
-      margin: 5px 10px 0px 20px; }
-      footer #flex-footer .bottom-text a {
-        text-decoration: none;
-        color: white;
-        font-size: 1.2rem;
-        text-transform: capitalize; }
+#layout-footer {
+  color: white;
+  background: grey;
+  margin-top: 100%;
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+  display: flex;
+  justify-content: flex-start; }
+  #layout-footer a {
+    color: white;
+    text-decoration: none; }
+  #layout-footer .footer-nav ul {
+    list-style: none; }
